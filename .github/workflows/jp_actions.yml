@@ -27,21 +27,15 @@ jobs:
         uses: actions/checkout@v4
 
       # Runs a single command using the runners shell
-      - name: ssh scp ssh pipelines
+      - name: Connectar-se via SSH i executar ordres
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-        env:
-         WELCOME: "ssh scp ssh pipelines"
-         LASTSSH: "Doing something after copying"
         with:
-         host: ${{ secrets.JP_IP }}
-         user: ${{ secrets.JP_USERNAME }}
-         pass: ${{ secrets.JP_PASSWORD }}
-         port: ${{ secrets.JP_PORT }}
-         connect_timeout: 10s
-         first_ssh: | 
-          ls -la  
-          echo $WELCOME
-         scp: |
-          './app.tgz' => ${{ secrets.DOCUMENT_ROOT }}
-         last_ssh: |
-          echo $LASTSSH
+          host: ${{ secrets.JP_IP }}
+          user: ${{ secrets.JP_USERNAME }}
+          pass: ${{ secrets.JP_PASSWORD }}
+          port: ${{ secrets.JP_PORT }}
+          first_ssh: |
+            echo "Ens hem connectat correctament al servidor!"
+
+      - name: Mostra el fitxer 
+        run: cat jp.txt
